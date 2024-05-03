@@ -2,20 +2,20 @@ function selectClickedItem(item) {
   item.classList.add("selected");
 }
 
-function removeSelectedItems(elements) {
-  elements.forEach((element) => element.classList.remove("selected"));
+function getAllElements(prop) {
+  const nodeList = document.querySelectorAll(prop);
+  return nodeList;
 }
 
-function getAllElementsSection(section) {
-  const nodeList = document.querySelectorAll(`#${section} > .item`);
-  return nodeList;
+function removeSelectedItems(section) {
+  const elements = getAllElements(`#${section} > .item`);
+  elements.forEach((element) => element.classList.remove("selected"));
 }
 
 function toggleItemSelection(element) {
   const item = element;
   const section = item.parentElement.id;
-  const elementsNodeList = getAllElementsSection(section);
 
-  removeSelectedItems(elementsNodeList);
+  removeSelectedItems(section);
   selectClickedItem(item);
 }
