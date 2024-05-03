@@ -169,7 +169,7 @@ body {
   background-color: var(--primary-color);
 }
 
-footer > button {
+#order-btn {
   width: 100%;
   max-width: 36.4rem;
   height: 7.2rem;
@@ -189,11 +189,11 @@ footer > button {
   transition: background-color 300ms;
 }
 
-footer > button:hover {
+#order-btn:hover {
   background-color: var(--btn-hover-color);
 }
 
-footer > button:disabled {
+#order-btn:disabled {
   font-weight: 400;
   color: var(--primary-color);
   background-color: var(--btn-disable-color);
