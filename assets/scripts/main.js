@@ -1,58 +1,44 @@
-function selectClickedItem(item) {
-  item.classList.add("selected");
+function select(element) {
+  element.classList.add("selected");
 }
 
-function getAllElements(prop) {
-  const nodeList = document.querySelectorAll(prop);
-  return nodeList;
+function getSelected(id) {
+  const elements = document.querySelector(`#${id} > .item.selected`);
+
+  return elements;
 }
 
-function removeSelectedItems(section) {
-  const elements = getAllElements(`#${section} > .item`);
-  elements.forEach((element) => element.classList.remove("selected"));
+function getAllSelected() {
+  const elements = document.querySelectorAll(".selected");
+
+  return elements;
 }
 
-function checksQuantitySelectedItems() {
-  const elements = getAllElements(".selected");
-  const quantitySelectedItems = elements.length;
-  return quantitySelectedItems;
+function deselect(id) {
+  const element = getSelected(id);
+
+  element?.classList.remove("selected");
 }
 
-function enableCloseOrderBtn(buttonProp) {
-  const button = document.querySelector(buttonProp);
+function enableCheckoutBtn() {
+  const button = document.getElementById("checkout-btn");
+  
   button.removeAttribute("disabled");
+  button.innerHTML = "Fechar pedido";
 }
 
-function updateTextButton(quantitySelectedItems) {
-  switch (quantitySelectedItems) {
-    case 1:
-      return `Selecione os outros 2 itens para fechar o pedido`;
-    case 2:
-      return `Selecione o item restante para fechar o pedido`;
-    case 3:
-      enableCloseOrderBtn("#order-btn");
-      return "Fechar pedido";
-  }
+function checkSelected() {
+  const selected = getAllSelected();
+  const selectedQuantity = selected.length;
+
+  selectedQuantity === 3 && enableCheckoutBtn();
 }
 
-function toggleText(elementProp, text) {
-  const element = document.querySelector(elementProp);
-
-  element.innerText = text;
-}
-
-function pageUpdate() {
-  const quantitySelectedItems = checksQuantitySelectedItems();
-  const newTextButton = updateTextButton(quantitySelectedItems);
-
-  toggleText("#order-btn", newTextButton);
-}
-
-function toggleItemSelection(element) {
+function toggleSelection(element) {
   const item = element;
-  const section = item.parentElement.id;
+  const parentID = item.parentElement.id;
 
-  removeSelectedItems(section);
-  selectClickedItem(item);
-  pageUpdate();
+  deselect(parentID);
+  select(item);
+  checkSelected();
 }

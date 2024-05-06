@@ -169,7 +169,7 @@ body {
   background-color: var(--primary-color);
 }
 
-#order-btn {
+#checkout-btn {
   width: 100%;
   max-width: 36.4rem;
   height: 7.2rem;
@@ -189,11 +189,11 @@ body {
   transition: background-color 300ms;
 }
 
-#order-btn:hover {
+#checkout-btn:hover {
   background-color: var(--btn-hover-color);
 }
 
-#order-btn:disabled {
+#checkout-btn:disabled {
   font-weight: 400;
   color: var(--primary-color);
   background-color: var(--btn-disable-color);
