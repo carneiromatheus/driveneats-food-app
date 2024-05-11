@@ -38,7 +38,7 @@
             width="144"
             height="88"
           />
-          <h2>Frango Yin Yang</h2>
+          <h2 class="name">Frango Yin Yang</h2>
           <p>um pouco de batata, um pouco de salada</p>
           <footer id="footer-item">
             <span class="price">R$ 14,90</span>
@@ -66,7 +66,7 @@
             width="144"
             height="88"
           />
-          <h2>Ostra Mediterrânea</h2>
+          <h2 class="name">Ostra Mediterrânea</h2>
           <p>Um prato do outro lado do mundo</p>
           <footer id="footer-item">
             <span class="price">R$ 19,90</span>
@@ -83,7 +83,7 @@
             width="144"
             height="88"
           />
-          <h2>Coquinha Gelada</h2>
+          <h2 class="name">Coquinha Gelada</h2>
           <p>350ml</p>
           <footer id="footer-item">
             <span class="price">R$ 5,90</span>
@@ -97,7 +97,7 @@
             width="144"
             height="88"
           />
-          <h2>Soda Refrescante</h2>
+          <h2 class="name">Soda Refrescante</h2>
           <p>350ml</p>
           <footer id="footer-item">
             <span class="price">R$ 7,90</span>
@@ -111,7 +111,7 @@
             width="144"
             height="88"
           />
-          <h2>Suquinho Natural</h2>
+          <h2 class="name">Suquinho Natural</h2>
           <p>500ml</p>
           <footer id="footer-item">
             <span class="price">R$ 9,90</span>
@@ -128,7 +128,7 @@
             width="144"
             height="88"
           />
-          <h2>Pudim</h2>
+          <h2 class="name">Pudim</h2>
           <p>A receita que o tio gosta</p>
           <footer id="footer-item">
             <span class="price">R$ 7,90</span>
@@ -142,7 +142,7 @@
             width="144"
             height="88"
           />
-          <h2>Panna Cotta</h2>
+          <h2 class="name">Panna Cotta</h2>
           <p>Novidade da casa</p>
           <footer id="footer-item">
             <span class="price">R$ 14,90</span>
@@ -156,7 +156,7 @@
             width="144"
             height="88"
           />
-          <h2>Sorvete</h2>
+          <h2 class="name">Sorvete</h2>
           <p>Tradição em dias quentes</p>
           <footer id="footer-item">
             <span class="price">R$ 6,90</span>
@@ -166,7 +166,12 @@
       </section>
     </main>
     <footer id="footer-page">
-      <button id="checkout-btn" type="button" disabled>
+      <button
+        id="checkout-btn"
+        type="button"
+        disabled
+        onclick="orderCheckout()"
+      >
         Selecione os 3 itens para fechar o pedido
       </button>
     </footer>
