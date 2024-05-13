@@ -71,32 +71,96 @@ function getCustomerInfo() {
   return { name: customerName, address: customerAddress };
 }
 
-function sendMessageToWpp(message) {
+let summaryOrder = {
+  dish: "Prato",
+  drink: "Bebida",
+  dessert: "Sobremesa",
+  total: "total",
+};
+
+function sendMessageToWpp(args = summaryOrder) {
+  const { dish, drink, dessert, total } = summaryOrder;
+  const customerInfo = getCustomerInfo();
+  const message = `
+  Olá, gostaria de fazer o pedido:
+  
+  - Prato: ${dish},
+  - Bebida: ${drink},
+  - Sobremesa: ${dessert}
+  
+  Total: ${total}
+  
+  Nome: ${customerInfo.name}
+  Endereço: ${customerInfo.address}
+  `;
   const number = "31993866415";
   const text = encodeURIComponent(message);
   const link = `https://wa.me//55${number}?text=${text}`;
+  const modal = document.getElementById("modal-container");
 
+  modal.innerHTML = `
+  <div id="modal">
+    <h3 id="modal-title">
+    🗸<br>Obrigado!
+    </h3>
+  </div>
+  `;
   window.open(link);
+}
+
+function closeModal() {
+  const modal = document.getElementById("modal-container");
+  modal.remove();
+}
+
+function openModal(cart) {
+  const { dish, drink, dessert } = cart;
+  const total = sumPrices(dish.price, drink.price, dessert.price);
+  summaryOrder = {
+    dish: dish.name,
+    drink: drink.name,
+    dessert: dessert.name,
+    total,
+  };
+  const modal = document.createElement("aside");
+  const modeloModal = `
+  <div id="modal">
+    <h3 id="modal-title">Confirme seu pedido</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td>${dish.name}</td>
+          <td class="cell-price">${dish.price}</td>
+        </tr>
+        <tr>
+          <td>${drink.name}</td>
+          <td class="cell-price">${drink.price}</td>
+        </tr>
+        <tr>
+          <td>${dessert.name}</td>
+          <td class="cell-price">${dessert.price}</td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th class="cell-price">${total}</th>
+        </tr>
+      </tbody>
+    </table>
+    <button class="modal-btn order-btn" type="button" onclick="sendMessageToWpp()">Tudo certo, pode pedir!</button>
+    <button class="modal-btn cancel-btn" type="button" onclick="closeModal()">Cancelar</button>
+  </div>
+`;
+
+  modal.id = "modal-container";
+  modal.innerHTML = modeloModal;
+  document.body.prepend(modal);
 }
 
 function orderCheckout() {
   const dish = getSelectedItemInfo("dishes");
   const drink = getSelectedItemInfo("drinks");
   const dessert = getSelectedItemInfo("desserts");
-  const total = sumPrices(dish.price, drink.price, dessert.price);
-  const customerInfo = getCustomerInfo();
-  const orderMessage = `
-    Olá, gostaria de fazer o pedido:
-  
-    - Prato: ${dish.name},
-    - Bebida: ${drink.name},
-    - Sobremesa: ${dessert.name}
-    
-    Total: ${total}
-    
-    Nome: ${customerInfo.name}
-    Endereço: ${customerInfo.address}
-  `;
+  const cart = { dish, drink, dessert };
 
-  sendMessageToWpp(orderMessage);
+  openModal(cart);
 }
